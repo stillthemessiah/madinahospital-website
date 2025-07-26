@@ -30,7 +30,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚕️</text></svg>">
     <!-- Font Awesome for icons (social media, resources, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+   
+
     <!-- Schema.org Structured Data (JSON-LD) for Local Business -->
     <script type="application/ld+json">
     {
@@ -388,22 +389,26 @@
                 <div class="carousel-track">
                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="1 of 4: YouTube video on Hospital Tour">
                         <div class="video-item">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/UVvEkeH4O8o?si=iE12fL9bckfpL6G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <!-- Added enablejsapi=1 and origin to YouTube embed URL -->
+                            <iframe id="youtube-video-1" width="560" height="315" src="https://www.youtube.com/embed/UVvEkeH4O8o?enablejsapi=1&origin=${window.location.origin}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="2 of 4: YouTube video on Patient Experience">
                         <div class="video-item">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/jh5U5BnpGN8?si=bNH8bCfXUs-YdJFE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <!-- Added enablejsapi=1 and origin to YouTube embed URL -->
+                            <iframe id="youtube-video-2" width="560" height="315" src="https://www.youtube.com/embed/jh5U5BnpGN8?enablejsapi=1&origin=${window.location.origin}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="3 of 4: YouTube video on Medical Innovations">
                         <div class="video-item">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/qetKUFDDF4A?si=WkQdtWUybLudPk1R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <!-- Added enablejsapi=1 and origin to YouTube embed URL -->
+                            <iframe id="youtube-video-3" width="560" height="315" src="https://www.youtube.com/embed/qetKUFDDF4A?enablejsapi=1&origin=${window.location.origin}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="4 of 4: YouTube video on Health Tips">
                         <div class="video-item">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/bd_hI-qRI8s?si=Sa6yJ2DbaoeODv-V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <!-- Added enablejsapi=1 and origin to YouTube embed URL -->
+                            <iframe id="youtube-video-4" width="560" height="315" src="https://www.youtube.com/embed/bd_hI-qRI8s?enablejsapi=1&origin=${window.location.origin}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -698,7 +703,7 @@
             <div class="footer-section">
                 <h3>Contact Information</h3>
                 <p>📍 Opposite Madina Ritz Junction<br>Total Filling Station, on Botwe Road, Accra, Ghana</p>
-                <p>� +233 59 916 6781</p>
+                <p>📞 +233 59 916 6781</p>
                 <p>📞 +233 24 920 6668</p>
                 <p>✉️ madinacommunityhospital@gmail.com</p>
                 <a href="./privacy.html">Privacy Policy</a>
@@ -933,6 +938,7 @@
                 this.currentIndex = 0;
                 this.autoPlayInterval = null;
                 this.autoPlayDelay = 5000;
+                this.isPausedByVideo = false; // New flag to track video-induced pause
 
                 this.init();
             }
@@ -1017,11 +1023,27 @@
             }
 
             startAutoplay() {
-                this.autoPlayInterval = setInterval(this.nextSlide.bind(this), this.autoPlayDelay);
+                // Only start autoplay if not paused by a video
+                if (!this.isPausedByVideo) {
+                    this.autoPlayInterval = setInterval(this.nextSlide.bind(this), this.autoPlayDelay);
+                }
             }
 
             resetAutoplay() {
                 clearInterval(this.autoPlayInterval);
+                // Only restart autoplay if not paused by a video
+                if (!this.isPausedByVideo) {
+                    this.startAutoplay();
+                }
+            }
+
+            pauseAutoplay() {
+                clearInterval(this.autoPlayInterval);
+                this.isPausedByVideo = true;
+            }
+
+            resumeAutoplay() {
+                this.isPausedByVideo = false;
                 this.startAutoplay();
             }
         }
@@ -1241,6 +1263,9 @@
         });
         // --- End Message Modal Logic ---
 
+        // --- Global Map to store Carousel Instances ---
+        const carouselInstances = new Map();
+
         // --- Main Document Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             const preloader = qs('#preloader');
@@ -1273,13 +1298,16 @@
             }, minPreloaderDisplayTime);
 
 
-            // Initialize all carousels on the page
-            qsa('.carousel-container').forEach(carousel => {
-                new Carousel(carousel);
+            // Initialize all carousels on the page and store their instances
+            qsa('.carousel-container').forEach(carouselEl => {
+                const carouselInstance = new Carousel(carouselEl);
+                carouselInstances.set(carouselEl.dataset.carousel, carouselInstance);
             });
 
-            // Initialize custom cursor
-            new CustomCursor();
+            // Initialize custom cursor (only if not on mobile)
+            if (window.innerWidth > 768) {
+                new CustomCursor();
+            }
 
             // Initialize magnetic buttons
             qsa('.cta-button, .submit-btn, .apply-btn, #fabAppointment').forEach(button => {
@@ -1657,6 +1685,59 @@
                 }
             });
 
+            // --- YouTube Video Play/Pause Integration for Carousel ---
+            const videosCarousel = carouselInstances.get('videos'); // Get the specific videos carousel instance
+
+            if (videosCarousel) {
+                on(window, 'message', (event) => {
+                    // Ensure the message is from a YouTube embed
+                    if (event.origin.startsWith('https://www.youtube.com') || event.origin.startsWith('https://youtube.com')) {
+                        try {
+                            const data = JSON.parse(event.data);
+                            // Check if the message is a player state change event
+                            if (data.event === 'info' && data.info && data.info.playerState !== undefined) {
+                                const playerState = data.info.playerState;
+                                // Player states:
+                                // -1 (unstarted)
+                                // 0 (ended)
+                                // 1 (playing)
+                                // 2 (paused)
+                                // 3 (buffering)
+                                // 5 (video cued)
+
+                                // Check if the message came from one of our video iframes
+                                const videoIframes = qsa('.video-item iframe', videosCarousel.carouselContainer);
+                                const isOurVideo = Array.from(videoIframes).some(iframe => iframe.contentWindow === event.source);
+
+                                if (isOurVideo) {
+                                    if (playerState === 1) { // Playing
+                                        videosCarousel.pauseAutoplay();
+                                    } else if (playerState === 0 || playerState === 2) { // Ended or Paused
+                                        videosCarousel.resumeAutoplay();
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            // console.error("Error parsing YouTube message:", e);
+                        }
+                    }
+                });
+
+                // Send a message to the YouTube iframe to start listening for events
+                // This needs to be done after the iframe is loaded and ready
+                qsa('.video-item iframe', videosCarousel.carouselContainer).forEach(iframe => {
+                    on(iframe, 'load', () => {
+                        // Post a message to the iframe to tell it to send state change events
+                        iframe.contentWindow.postMessage(JSON.stringify({
+                            'event': 'listening',
+                            'id': iframe.id,
+                            'channel': 'widget'
+                        }), '*'); // Use '*' for origin here as iframe's origin is YouTube
+                    });
+                });
+            }
+            // --- End YouTube Video Play/Pause Integration ---
+
 
             console.log('Madina Community Hospital & Specialist Services - Advanced Healthcare Website Loaded');
             console.log('Built with modern web technologies and optimized for performance');
@@ -1664,4 +1745,3 @@
     </script>
 </body>
 </html>
-�
