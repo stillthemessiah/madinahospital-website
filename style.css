@@ -153,6 +153,7 @@
             border: none;
             box-shadow: none;
             display: block;
+            object-fit: contain; /* Ensures the image fits within the bounds without stretching */
         }
 
         .nav-links {
@@ -486,7 +487,7 @@
 
         .image-carousel-section .carousel-item img {
             width: 100%;
-            height: auto; /* Changed from fixed height */
+            height: auto;
             max-height: 450px; /* Added max-height for desktop */
             object-fit: contain;
             border-radius: 15px;
@@ -1457,13 +1458,76 @@
             }
         }
 
+        /* Apply translate3d for hardware acceleration */
+        .bg-animation,
+        .custom-cursor,
+        .cursor-dot,
+        .cursor-outline,
+        .hero-visual,
+        .hero-card,
+        .service-card,
+        .doctor-card,
+        .blog-post,
+        .faq-item,
+        .job-opening,
+        .resource-item,
+        .carousel-track,
+        .carousel-item,
+        .carousel-nav-btn,
+        .carousel-dot,
+        .theme-toggle,
+        .scroll-to-top-btn,
+        #fabAppointment,
+        #sectionNavDots .nav-dot {
+            transform: translate3d(0, 0, 0); /* Default to force hardware acceleration */
+        }
+
+        /* Specific overrides for elements with existing transforms */
+        .hero-visual {
+            animation: slideInRight 1s ease-out forwards; /* Keep existing animation */
+        }
+        .hero-card {
+            animation: float 6s ease-in-out infinite forwards; /* Keep existing animation */
+        }
+        .carousel-item.active {
+            transform: scale(1) translateY(0) translate3d(0,0,0); /* Add translate3d */
+        }
+        .carousel-nav-btn:hover {
+            transform: translateY(-50%) scale(1.1) translate3d(0,0,0); /* Add translate3d */
+        }
+        .carousel-dot.active {
+            transform: scale(1.2) translate3d(0,0,0); /* Add translate3d */
+        }
+        .theme-toggle {
+            transform: translateY(-50%) translate3d(0,0,0); /* Add translate3d */
+        }
+        .scroll-to-top-btn.show {
+            transform: translateY(-5px) translate3d(0,0,0); /* Add translate3d */
+        }
+        .scroll-to-top-btn:hover {
+            transform: translateY(-8px) scale(1.1) translate3d(0,0,0); /* Add translate3d */
+        }
+        #fabAppointment.show {
+            transform: translateX(-50%) translateY(-5px) translate3d(0,0,0); /* Add translate3d */
+        }
+        #fabAppointment:hover {
+            transform: translateX(-50%) translateY(-8px) scale(1.05) translate3d(0,0,0); /* Add translate3d */
+        }
+        #sectionNavDots {
+            transform: translateY(-50%) translate3d(0,0,0); /* Add translate3d */
+        }
+        #sectionNavDots .nav-dot.active {
+            transform: scale(1.3) translate3d(0,0,0); /* Add translate3d */
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             :root {
                 --header-height: 80px; /* Smaller header height for mobile */
             }
             .logo .symbol img {
-                max-height: 90px; /* Adjusted logo size for mobile */
+                max-height: 75px; /* Adjusted logo size to fit perfectly in 80px header */
+                padding: 5px 0; /* Add slight vertical padding to prevent touching edges */
             }
             nav {
                 padding: 0.1rem 0.5rem; 
@@ -1548,11 +1612,20 @@
             }
             .image-carousel-section .carousel-item img {
                 height: auto; /* Ensures aspect ratio is maintained */
-                max-height: 300px; /* Max height for mobile carousel images */
+                max-height: 250px; /* Adjusted max-height for mobile carousel images */
             }
             /* Adjusted gallery-item img for better mobile responsiveness */
             .gallery-item img {
-                max-height: 300px; /* Adjusted to be consistent with image-carousel mobile max-height */
+                max-height: 250px; /* Adjusted to be consistent with image-carousel mobile max-height */
+            }
+            .testimonial-card {
+                padding: 1.2rem; /* Reduced padding further for very small screens */
+            }
+            .testimonial-card p {
+                font-size: 0.95rem; /* Slightly smaller font */
+            }
+            .testimonial-author {
+                font-size: 1rem; /* Slightly smaller font */
             }
             .section-title {
                 font-size: 2.2rem; /* Smaller font size for mobile section titles */
@@ -1560,9 +1633,6 @@
             }
             .services, .doctors, .blog, .faq, .careers, .resources, .appointment-booking, .about, .map-section, .contact {
                 padding: 3rem 1rem; /* Reduced padding for all sections on mobile */
-            }
-            .testimonial-card p {
-                font-size: 1rem; /* Smaller font for testimonials on mobile */
             }
             .contact-content {
                 gap: 2rem; /* Reduced gap in contact section on mobile */
@@ -1588,13 +1658,18 @@
             .social-links {
                 justify-content: flex-start; /* Align social links to left on mobile */
             }
-            .theme-toggle, .scroll-to-top-btn, #sectionNavDots, #fabAppointment {
-                right: 1rem; /* Adjust fixed elements to be closer to edge */
+            /* Fixed elements positioning for mobile */
+            .theme-toggle {
+                top: 6rem; /* Position below header, adjust as needed */
+                right: 1rem;
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
             }
             #sectionNavDots {
+                right: 0.5rem; /* Slightly closer to edge */
+                top: 50%;
+                transform: translateY(-50%) translate3d(0,0,0); /* Ensure vertical centering and hardware accel */
                 padding: 0.8rem 0.4rem;
                 gap: 0.6rem;
             }
@@ -1602,21 +1677,25 @@
                 width: 10px;
                 height: 10px;
             }
+            #scrollToTopBtn {
+                bottom: 1.5rem; /* Slightly lower */
+                right: 1rem;
+                width: 45px; /* Slightly larger for easier tap */
+                height: 45px;
+                font-size: 1.5rem;
+            }
             #fabAppointment {
+                bottom: 1.5rem; /* Align with scroll-to-top button */
+                left: 50%;
+                transform: translateX(-50%) translate3d(0,0,0); /* Hardware accel */
                 padding: 0.8rem 1.2rem;
                 font-size: 0.9rem;
             }
-        }
 
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .fade-in.delayed {
-            animation-delay: 0.3s;
+            /* Hide custom cursor on small screens (likely touch devices) */
+            .custom-cursor {
+                display: none;
+            }
         }
 
         /* Interactive cursor */
@@ -1900,4 +1979,4 @@
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
         }
-    
+   
