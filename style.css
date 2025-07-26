@@ -137,7 +137,7 @@
             max-width: 1200px;
             margin: 0 auto;
             /* Adjusted padding to accommodate even larger logo without increasing header size */
-            padding: 0rem 0.5rem; 
+            padding: 0.75rem 0.5rem; /* Adjusted vertical padding */
             width: 100%; /* Ensure nav takes full width of header's max-width */
         }
 
@@ -146,18 +146,19 @@
             align-items: center;
             gap: 0.5rem;
             line-height: 1.2;
+            /* Removed max-height from .logo as it's controlled by svg directly */
         }
 
-        .logo .symbol img {
-            /* Significantly increased max-height for a much larger logo */
-            max-height: 120px; /* Adjusted to a much larger size for header */
-            width: auto;
+        /* NEW: Styling for the hospital logo image */
+        .logo .hospital-logo {
+            max-height: 70px; /* Adjusted to blend seamlessly */
+            width: auto; /* Maintain aspect ratio */
             height: auto;
-            border: none;
-            box-shadow: none;
-            display: block;
-            object-fit: contain; /* Ensures the image fits within the bounds without stretching */
+            display: block; /* Ensure it behaves as a block element */
+            object-fit: contain; /* Ensure the image fits within its bounds without cropping */
+            transition: max-height 0.3s ease; /* Smooth transition for resizing */
         }
+
 
         .nav-links {
             display: flex;
@@ -468,7 +469,7 @@
             display: block;  /* Prevent extra space below images and ensure they behave as blocks */
         }
 
-        /* New Image Carousel Section Styles */
+        /* New Image Carousel Section */
         .image-carousel-section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -1711,8 +1712,9 @@
             :root {
                 --header-height: 80px; /* Smaller header height for mobile */
             }
-            .logo .symbol img {
-                max-height: 75px; /* Adjusted logo size to fit perfectly in 80px header */
+            /* UPDATED: Mobile styling for the hospital logo image */
+            .logo .hospital-logo {
+                max-height: 40px; /* Smaller for mobile */
                 padding: 5px 0; /* Add slight vertical padding to prevent touching edges */
             }
             nav {
