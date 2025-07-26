@@ -1,4 +1,4 @@
-
+ 
         /* Global Styles & Variables */
         * {
             margin: 0;
@@ -151,7 +151,7 @@
 
         /* NEW: Styling for the hospital logo image */
         .logo .hospital-logo {
-            max-height: 70px; /* Adjusted to blend seamlessly */
+            max-height: 85px; /* Adjusted to blend seamlessly - Increased from 70px */
             width: auto; /* Maintain aspect ratio */
             height: auto;
             display: block; /* Ensure it behaves as a block element */
@@ -1714,7 +1714,7 @@
             }
             /* UPDATED: Mobile styling for the hospital logo image */
             .logo .hospital-logo {
-                max-height: 40px; /* Smaller for mobile */
+                max-height: 50px; /* Smaller for mobile - Increased from 40px */
                 padding: 5px 0; /* Add slight vertical padding to prevent touching edges */
             }
             nav {
@@ -1848,7 +1848,7 @@
             }
             /* Fixed elements positioning for mobile */
             .theme-toggle {
-                top: 6rem; /* Position below header, adjust as needed */
+                top: 7rem; /* Position below header, adjusted from 6rem */
                 right: 1rem;
                 width: 40px;
                 height: 40px;
