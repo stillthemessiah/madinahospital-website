@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Madina Community Hospital & Specialist Services</title>
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚕️</text></svg>" type="image/svg+xml">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Global Styles & Variables (consistent with main site) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --shadow-glow: 0 0 30px rgba(102, 126, 234, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Light Theme (consistent with main site) */
+        body.light-theme {
+            --dark-bg: #f0f2f5;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text-primary: #333333;
+            --text-secondary: #555555;
+            --shadow-glow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+        }
+
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: bold;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .logo .symbol {
+            font-size: 1.2em;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-glow);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gradient);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-gradient);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-gradient);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            border-radius: 15px;
+            color: var(--text-secondary);
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header, main, footer {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Theme toggle (consistent with main site) */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            will-change: transform, background, border-color, box-shadow;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="logo" aria-label="Madina Community Hospital & Specialist Services Logo"><span class="symbol">⚕️</span> Madina Community Hospital & Specialist Services</div>
+    </header>
+
+    <main role="main">
+        <h1>Terms of Service</h1>
+        <p><strong>Last Updated: July 18, 2025</strong></p>
+
+        <p>Welcome to the Madina Community Hospital & Specialist Services website. These Terms of Service ("Terms") govern your access to and use of our website and services. By accessing or using our website, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you must not use our website.</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By using our website, you confirm that you are at least 18 years of age or accessing the site under the supervision of a parent or guardian. You agree to comply with all applicable laws and regulations regarding your use of the website.</p>
+
+        <h2>2. Use of Website</h2>
+        <ul>
+            <li>You agree to use the website only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the website.</li>
+            <li>Prohibited conduct includes harassing or causing distress or inconvenience to any person, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within our website.</li>
+            <li>You must not misuse our website by knowingly introducing viruses, trojans, worms, logic bombs, or other material that is malicious or technologically harmful.</li>
+        </ul>
+
+        <h2>3. Medical Disclaimer</h2>
+        <p>The content provided on this website is for informational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+        <p>Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.</p>
+
+        <h2>4. Intellectual Property</h2>
+        <p>All content on this website, including text, graphics, logos, images, videos, and software, is the property of Madina Community Hospital & Specialist Services or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, modify, display, or create derivative works from any content without our prior written permission.</p>
+
+        <h2>5. Links to Third-Party Websites</h2>
+        <p>Our website may contain links to third-party websites or services that are not owned or controlled by Madina Community Hospital & Specialist Services. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You acknowledge and agree that we shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such websites or services.</p>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by applicable law, Madina Community Hospital & Specialist Services, its directors, employees, partners, agents, suppliers, or affiliates, shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the website; (ii) any conduct or content of any third party on the website; (iii) any content obtained from the website; and (iv) unauthorized access, use, or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence), or any other legal theory, whether or not we have been informed of the possibility of such damage, and even if a remedy set forth herein is found to have failed of its essential purpose.</p>
+
+        <h2>7. Indemnification</h2>
+        <p>You agree to defend, indemnify, and hold harmless Madina Community Hospital & Specialist Services and its licensee and licensors, and their employees, contractors, agents, officers, and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), resulting from or arising out of a) your use and access of the website, by you or any person using your account and password; or b) a breach of these Terms.</p>
+
+        <h2>8. Governing Law</h2>
+        <p>These Terms shall be governed and construed in accordance with the laws of Ghana, without regard to its conflict of law provisions.</p>
+        <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our website and supersede and replace any prior agreements we might have between us regarding the website.</p>
+
+        <h2>9. Changes to Terms of Service</h2>
+        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. By continuing to access or use our website after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the website.</p>
+
+        <h2>10. Contact Us</h2>
+        <p>If you have any questions about these Terms of Service, please contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> info@madinahospital.com</li>
+            <li><strong>Phone:</strong> +233 59 916 6781, +233 24 920 6668</li>
+            <li><strong>Address:</strong> Opposite Madina Ritz Junction, Total Filling Station, on Botwe Road, Accra, Ghana</li>
+        </ul>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 Madina Community Hospital & Specialist Services. All rights reserved.</p>
+        <p><a href="./privacy-policy.html">Privacy Policy</a> | <a href="./terms-of-service.html">Terms of Service</a></p>
+    </footer>
+
+    <!-- Theme toggle (consistent with main site) -->
+    <button class="theme-toggle" aria-label="Toggle light and dark theme">🌙</button>
+    <script>
+        // Theme toggle functionality (consistent with main site)
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            themeToggle.innerHTML = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+        });
+
+        // Set initial theme based on local storage or system preference (optional, for consistency)
+        // For simplicity, this example just uses the toggle.
+        // You can add more advanced theme persistence if needed.
+        if (document.body.classList.contains('light-theme')) {
+            themeToggle.innerHTML = '☀️';
+        } else {
+            themeToggle.innerHTML = '🌙';
+        }
+    </script>
+</body>
+</html>

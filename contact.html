@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Madina Community Hospital & Specialist Services</title>
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚕️</text></svg>" type="image/svg+xml">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Global Styles & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --shadow-glow: 0 0 30px rgba(102, 126, 234, 0.3);
+            --card-hover-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none; /* Hide default cursor */
+            scroll-behavior: smooth; /* Smooth scroll for navigation */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            --dark-bg: #f0f2f5;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --text-primary: #333333;
+            --text-secondary: #555555;
+            --shadow-glow: 0 0 30px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid var(--accent-gradient);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        body.light-theme .bg-animation {
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+        }
+
+        @keyframes bgShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(-20px); }
+            75% { transform: translateX(-10px) translateY(10px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.7rem 1.5rem;
+        }
+
+        .logo {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: bold;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .logo .symbol {
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+
+        .nav-links a:hover {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateY(0);
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-bg);
+        }
+        body.light-theme .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content Styling */
+        main {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 2rem; /* Adjusted padding-top for fixed header */
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 40%;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+        }
+
+        h1.animated::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 2rem 0; /* Reduced padding as main already has it */
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            transition: all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+        }
+
+        .form-group input:valid:not(:placeholder-shown),
+        .form-group textarea:valid:not(:placeholder-shown) {
+            border-color: #4CAF50;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .form-group input:invalid:not(:placeholder-shown),
+        .form-group textarea:invalid:not(:placeholder-shown) {
+            border-color: #f44336;
+            box-shadow: 0 0 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s ease-out;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: center;
+        }
+
+        .submit-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-glow);
+            margin-top: 3rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: auto; /* Push footer to bottom */
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--text-primary);
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 6rem 1rem 1rem; /* Adjusted padding for mobile */
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--glass-border);
+            }
+            body.light-theme .nav-links {
+                background: rgba(255, 255, 255, 0.95);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block !important;
+            }
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s linear;
+        }
+
+        .cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(102, 126, 234, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(102, 126, 234, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease-out, height 0.2s ease-out, border-color 0.2s ease-out;
+        }
+
+        .custom-cursor.hovered .cursor-outline {
+            width: 50px;
+            height: 50px;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Particle system */
+        .particles div {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            animation: float-particle 10s ease-in-out infinite;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 1; }
+            25% { transform: translateY(-10px) translateX(5px); opacity: 0.8; }
+            50% { transform: translateY(10px) translateX(-5px); opacity: 1; }
+            75% { transform: translateY(-5px) translateX(10px); opacity: 0.8; }
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+
+        /* Scroll-to-top button */
+        .scroll-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        .scroll-to-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-5px);
+        }
+
+        .scroll-to-top-btn:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Floating Action Button (FAB) */
+        #fabAppointment {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 998;
+        }
+
+        #fabAppointment.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        #fabAppointment:hover {
+            transform: translateX(-50%) translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Scroll Progress Indicator */
+        #scrollProgress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent-gradient);
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader HTML -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="bg-animation"></div>
+    
+    <header role="banner">
+        <nav role="navigation" aria-label="Main Navigation">
+            <div class="logo" aria-label="Madina Community Hospital & Specialist Services Logo"><span class="symbol">⚕️</span> Madina Community Hospital & Specialist Services</div>
+            <ul class="nav-links">
+                <li><a href="./index.html#home" aria-label="Go to Home section">Home</a></li>
+                <li><a href="./index.html#image-carousel" aria-label="Go to Image Carousel section">Images</a></li>
+                <li><a href="./index.html#services" aria-label="Go to Services section">Services</a></li>
+                <li><a href="./index.html#doctors" aria-label="Go to Our Doctors section">Our Doctors</a></li>
+                <li><a href="./index.html#gallery" aria-label="Go to Gallery section">Gallery</a></li>
+                <li><a href="./index.html#testimonials" aria-label="Go to Testimonials section">Testimonials</a></li>
+                <li><a href="./index.html#videos" aria-label="Go to Videos section">Videos</a></li>
+                <li><a href="./index.html#blog" aria-label="Go to Blog and News section">Blog & News</a></li>
+                <li><a href="./index.html#faq" aria-label="Go to Frequently Asked Questions section">FAQ</a></li>
+                <li><a href="./index.html#careers" aria-label="Go to Careers section">Careers</a></li>
+                <li><a href="./index.html#resources" aria-label="Go to Patient Resources section">Resources</a></li>
+                <li><a href="./index.html#appointment" aria-label="Go to Book an Appointment section">Book Appointment</a></li>
+                <li><a href="./index.html#about" aria-label="Go to About Us section">About</a></li>
+                <li><a href="./contact.html" aria-label="Go to Contact Us section">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+        </nav>
+    </header>
+
+    <main role="main">
+        <section class="contact" id="contact-page" aria-labelledby="contact-page-title">
+            <h1 id="contact-page-title" class="animated">Get In Touch</h1>
+            <div class="contact-content">
+                <div class="contact-info" role="complementary" aria-label="Hospital Contact Information">
+                    <div class="contact-item">
+                        <div class="contact-icon" aria-hidden="true">📍</div>
+                        <div>
+                            <h3>Address</h3>
+                            <p>Opposite Madina Ritz Junction<br>Total Filling Station, on Botwe Road</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" aria-hidden="true">📞</div>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+233 59 916 6781</p>
+                            <p>+233 24 920 6668</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" aria-hidden="true">✉️</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@madinahospital.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" aria-hidden="true">🕐</div>
+                        <div>
+                            <h3>Hours</h3>
+                            <p>24/7 Emergency Services<br>Mon-Fri: 8AM-8PM (General)</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm" action="https://formsubmit.co/info.iamthemessiah@gmail.com" method="POST" aria-label="Contact Us Form">
+                    <!-- Hidden field for Formsubmit.io to redirect after submission -->
+                    <input type="hidden" name="_redirect" value="https://yourwebsite.com/thankyou.html">
+                    <!-- Hidden field for email subject line -->
+                    <input type="hidden" name="_subject" value="New Contact Form Submission from Madina Community Hospital Website (Contact Page)">
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" aria-label="Send your message">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="map-section" id="location" aria-labelledby="map-title">
+            <h2 class="section-title" id="map-title">Find Us on the Map</h2>
+            <div class="map-container" role="region" aria-label="Google Map showing hospital location">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.184848645281!2d-0.16842272635557162!3d5.686406132327361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9d60eca68d3f%3A0xb868ea6a0be3a12!2sMadina%20Community%20Hospital%20and%20specialist%20services!5e0!3m2!1sen!2sgh!4v1752790756298!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Madina Community Hospital & Specialist Services</h3>
+                <p>Providing exceptional healthcare services with compassion and excellence.</p>
+                <div class="social-links" aria-label="Social Media Links">
+                    <a href="https://www.facebook.com/profile.php?id=61575986180979" target="_blank" rel="noopener noreferrer" aria-label="Visit us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@madina.community?_t=ZM-8y6xqHxPWGg&_r=1" target="_blank" rel="noopener noreferrer" aria-label="Visit us on TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/madina_community_hospital_?igsh=MWkyOTlrenN4Y3E0dA==&utm_source=ig_contact_invite" target="_blank" rel="noopener noreferrer" aria-label="Visit us on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="./index.html#home">Home</a>
+                <a href="./index.html#image-carousel">Images</a>
+                <a href="./index.html#services">Services</a>
+                <a href="./index.html#doctors">Our Doctors</a>
+                <a href="./index.html#gallery">Gallery</a>
+                <a href="./index.html#testimonials">Testimonials</a>
+                <a href="./index.html#videos">Videos</a>
+                <a href="./index.html#blog">Blog & News</a>
+                <a href="./index.html#faq">FAQ</a>
+                <a href="./index.html#careers">Careers</a>
+                <a href="./index.html#resources">Resources</a>
+                <a href="./index.html#appointment">Book Appointment</a>
+                <a href="./index.html#about">About</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="./index.html#service-opd-emergency">24/7 OPD & Emergency</a>
+                <a href="./index.html#service-inpatient-wards">In-patient & VIP Wards</a>
+                <a href="./index.html#service-diagnostic-lab">Diagnostic & Lab Services</a>
+                <a href="./index.html#service-pharmacy">Walk-In Pharmacy</a>
+                <a href="./index.html#service-maternity-child">Maternity & Child Health</a>
+                <a href="./index.html#service-specialized-surgery">Specialized Surgery</a>
+                <a href="./index.html#service-specialized-clinics">Specialized Clinics</a>
+                <a href="./index.html#service-palliative-wound">Palliative & Wound Care</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 Opposite Madina Ritz Junction<br>Total Filling Station, on Botwe Road</p>
+                <p>📞 +233 59 916 6781</p>
+                <p>📞 +233 24 920 6668</p>
+                <p>✉️ info@madinahospital.com</p>
+                <a href="./privacy-policy.html">Privacy Policy</a>
+                <a href="./terms-of-service.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Madina Community Hospital & Specialist Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Cursor HTML -->
+    <div class="custom-cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+    </div>
+
+    <button class="theme-toggle" aria-label="Toggle light and dark theme">🌙</button>
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" aria-label="Scroll to top">⬆️</button>
+    <a href="./index.html#appointment" id="fabAppointment" aria-label="Book an Appointment Now">Book Now</a>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress"></div>
+
+    <script>
+        // --- Utility Functions ---
+        const qs = (selector) => document.querySelector(selector);
+        const qsa = (selector) => document.querySelectorAll(selector);
+        const on = (element, event, handler) => element.addEventListener(event, handler);
+        const debounce = (func, delay) => {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), delay);
+            };
+        };
+        const throttle = (func, limit) => {
+            let inThrottle;
+            return function(...args) {
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        };
+
+        // --- Custom Cursor Module ---
+        class CustomCursor {
+            constructor() {
+                this.cursor = qs('.custom-cursor');
+                this.dot = qs('.cursor-dot');
+                this.outline = qs('.cursor-outline');
+                this.x = 0;
+                this.y = 0;
+                this.targetX = 0;
+                this.targetY = 0;
+                this.speed = 0.2;
+                this.init();
+            }
+
+            init() {
+                on(document, 'mousemove', this.onMouseMove.bind(this));
+                this.animate();
+                this.addHoverEffects();
+            }
+
+            onMouseMove(e) {
+                this.targetX = e.clientX;
+                this.targetY = e.clientY;
+            }
+
+            animate() {
+                this.x += (this.targetX - this.x) * this.speed;
+                this.y += (this.targetY - this.y) * this.speed;
+                this.cursor.style.transform = `translate(${this.x}px, ${this.y}px)`;
+                requestAnimationFrame(this.animate.bind(this));
+            }
+
+            addHoverEffects() {
+                const interactiveElements = qsa('a, button, input, textarea, .contact-item, .submit-btn, .theme-toggle, #scrollToTopBtn, #fabAppointment');
+                interactiveElements.forEach(el => {
+                    on(el, 'mouseenter', () => this.cursor.classList.add('hovered'));
+                    on(el, 'mouseleave', () => this.cursor.classList.remove('hovered'));
+                });
+            }
+        }
+
+        // --- Magnetic Button Module ---
+        class MagneticButton {
+            constructor(element) {
+                this.element = element;
+                this.magneticForce = 0.3;
+                this.maxDistance = 30;
+                this.init();
+            }
+
+            init() {
+                on(this.element, 'mousemove', throttle(this.onMouseMove.bind(this), 16));
+                on(this.element, 'mouseleave', this.onMouseLeave.bind(this));
+                this.element.style.transition = 'transform 0.2s ease-out';
+            }
+
+            onMouseMove(e) {
+                const { left, top, width, height } = this.element.getBoundingClientRect();
+                const centerX = left + width / 2;
+                const centerY = top + height / 2;
+                const deltaX = e.clientX - centerX;
+                const deltaY = e.clientY - centerY;
+                const moveX = Math.max(-this.maxDistance, Math.min(this.maxDistance, deltaX * this.magneticForce));
+                const moveY = Math.max(-this.maxDistance, Math.min(this.maxDistance, deltaY * this.magneticForce));
+                this.element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+
+            onMouseLeave() {
+                this.element.style.transform = `translate(0px, 0px)`;
+            }
+        }
+
+        // --- Ripple Effect Function ---
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - (button.getBoundingClientRect().left + radius)}px`;
+            circle.style.top = `${event.clientY - (button.getBoundingClientRect().top + radius)}px`;
+            circle.classList.add('ripple-effect');
+
+            const ripple = button.getElementsByClassName('ripple-effect')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+            button.appendChild(circle);
+        }
+
+        // --- Scroll Progress Indicator ---
+        const updateScrollProgress = throttle(() => {
+            const scrollProgress = qs('#scrollProgress');
+            const scrollY = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollY / docHeight) * 100;
+            scrollProgress.style.width = `${scrollPercent}%`;
+        }, 16);
+
+        // --- Main Document Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = qs('#preloader');
+
+            // Hide preloader
+            on(window, 'load', () => {
+                preloader.classList.add('hidden');
+                setTimeout(() => {
+                    if (preloader) {
+                        preloader.remove();
+                    }
+                }, 600);
+            });
+
+            // Initialize custom cursor
+            new CustomCursor();
+
+            // Initialize magnetic buttons
+            qsa('.submit-btn, #fabAppointment').forEach(button => {
+                new MagneticButton(button);
+            });
+
+            // Smooth scrolling for navigation links (for internal anchors on this page)
+            qsa('a[href^="#"]').forEach(anchor => {
+                on(anchor, 'click', function (e) {
+                    e.preventDefault();
+                    const target = qs(this.getAttribute('href'));
+                    if (target) {
+                        const navLinks = qs('.nav-links');
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Header scroll effect (throttled for performance)
+            on(window, 'scroll', throttle(() => {
+                const header = qs('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(10, 10, 10, 0.95)';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(10, 10, 10, 0.9)';
+                    header.style.boxShadow = 'none';
+                }
+                if (qs('body').classList.contains('light-theme')) {
+                    header.style.background = window.scrollY > 100 ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.9)';
+                    header.style.boxShadow = window.scrollY > 100 ? '0 5px 20px rgba(0, 0, 0, 0.1)' : 'none';
+                }
+            }, 100));
+
+            // Intersection Observer for fade-in animations for main title
+            const sectionObserverOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, sectionObserverOptions);
+
+            sectionObserver.observe(qs('h1')); // Observe the main title
+
+            // Enhanced form validation visual feedback
+            qsa('input, textarea').forEach(input => {
+                on(input, 'focus', () => {
+                    input.style.borderColor = '#667eea';
+                    input.style.boxShadow = '0 0 15px rgba(102, 126, 234, 0.5)';
+                });
+                
+                on(input, 'blur', () => {
+                    if (input.value.trim() === '') {
+                        input.style.borderColor = 'var(--glass-border)';
+                        input.style.boxShadow = 'none';
+                    } else if (input.checkValidity()) {
+                        input.style.borderColor = '#4CAF50';
+                        input.style.boxShadow = '0 0 15px rgba(76, 175, 80, 0.3)';
+                    } else {
+                        input.style.borderColor = '#f44336';
+                        input.style.boxShadow = '0 0 15px rgba(244, 67, 54, 0.3)';
+                    }
+                });
+                if (input.value.trim() !== '') {
+                    if (input.checkValidity()) {
+                        input.style.borderColor = '#4CAF50';
+                    } else {
+                        input.style.borderColor = '#f44336';
+                    }
+                }
+            });
+
+            // Particle system for background
+            const createParticles = () => {
+                const particlesContainer = document.createElement('div');
+                particlesContainer.className = 'particles';
+                particlesContainer.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: -1;
+                `;
+                qs('body').appendChild(particlesContainer);
+
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    particlesContainer.appendChild(particle);
+                }
+            };
+            createParticles();
+
+            // Mobile menu toggle
+            const menuToggle = qs('.menu-toggle');
+            const navLinks = qs('.nav-links');
+
+            on(menuToggle, 'click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Theme toggle functionality
+            const themeToggle = qs('.theme-toggle');
+            on(themeToggle, 'click', () => {
+                qs('body').classList.toggle('light-theme');
+                themeToggle.innerHTML = qs('body').classList.contains('light-theme') ? '☀️' : '�';
+            });
+
+            // Service worker registration for PWA capabilities
+            if ('serviceWorker' in navigator) {
+                on(window, 'load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('SW registered: ', registration);
+                        })
+                        .catch(registrationError => {
+                            console.log('SW registration failed: ', registrationError);
+                        });
+                });
+            }
+
+            // --- Scroll-to-Top Button Logic ---
+            const scrollToTopBtn = qs('#scrollToTopBtn');
+            const fabAppointment = qs('#fabAppointment');
+
+            on(window, 'scroll', throttle(() => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                    fabAppointment.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                    fabAppointment.classList.remove('show');
+                }
+                updateScrollProgress();
+            }, 100));
+
+            on(scrollToTopBtn, 'click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            // --- End Scroll-to-Top Button Logic ---
+
+            // Add ripple effect to relevant buttons
+            qsa('.submit-btn, #fabAppointment').forEach(button => {
+                on(button, 'click', createRipple);
+            });
+
+            // Handle form submission directly
+            const contactForm = qs('#contactForm');
+            on(contactForm, 'submit', async (event) => {
+                event.preventDefault();
+
+                const form = event.target;
+                const formData = new FormData(form);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(formObject)
+                    });
+
+                    if (response.ok) {
+                        console.log('Form submitted successfully!');
+                        form.reset();
+                        // Optionally, you can add a temporary success message to the page
+                    } else {
+                        const errorData = await response.json().catch(() => ({ message: 'Unknown error occurred.' }));
+                        console.error('Form submission failed:', errorData.message || 'Please try again.');
+                        // Optionally, display an error message on the page
+                    }
+                } catch (error) {
+                    console.error('Network error during form submission:', error);
+                }
+            });
+
+            console.log('Contact Us page loaded.');
+        });
+    </script>
+</body>
+</html>
+�
