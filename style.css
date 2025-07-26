@@ -4,6 +4,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Force hardware acceleration for all elements by default */
+            transform: translate3d(0, 0, 0); 
+            will-change: transform, opacity; /* General will-change for performance */
         }
 
         :root {
@@ -115,7 +118,7 @@
             border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
             transition: all 0.3s ease;
-            will-change: background, box-shadow; /* Performance optimization */
+            will-change: background, box-shadow, transform; /* Added transform to will-change */
             /* Set header height to CSS variable */
             height: var(--header-height);
             display: flex;
@@ -953,8 +956,8 @@
         }
 
         .resource-item p {
-            font-size: 0.95rem;
             color: var(--text-secondary);
+            font-size: 0.95rem;
             margin-bottom: 1rem;
         }
 
@@ -1428,96 +1431,279 @@
         @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateX(-50px) translate3d(0,0,0); /* Added translate3d */
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(0) translate3d(0,0,0); /* Added translate3d */
             }
         }
 
         @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: translateX(50px) translate3d(0,0,0); /* Added translate3d */
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(0) translate3d(0,0,0); /* Added translate3d */
             }
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(30px) translate3d(0,0,0); /* Added translate3d */
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) translate3d(0,0,0); /* Added translate3d */
             }
         }
 
-        /* Apply translate3d for hardware acceleration */
-        .bg-animation,
-        .custom-cursor,
-        .cursor-dot,
-        .cursor-outline,
-        .hero-visual,
-        .hero-card,
-        .service-card,
-        .doctor-card,
-        .blog-post,
-        .faq-item,
-        .job-opening,
-        .resource-item,
-        .carousel-track,
-        .carousel-item,
-        .carousel-nav-btn,
-        .carousel-dot,
-        .theme-toggle,
-        .scroll-to-top-btn,
-        #fabAppointment,
-        #sectionNavDots .nav-dot {
-            transform: translate3d(0, 0, 0); /* Default to force hardware acceleration */
+        @keyframes fadeInUpScale {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95) translate3d(0,0,0); /* Added translate3d */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1) translate3d(0,0,0); /* Added translate3d */
+            }
         }
 
-        /* Specific overrides for elements with existing transforms */
-        .hero-visual {
-            animation: slideInRight 1s ease-out forwards; /* Keep existing animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translate3d(0,0,0); } /* Added translate3d */
+            50% { transform: translateY(-20px) translate3d(0,0,0); } /* Added translate3d */
         }
-        .hero-card {
-            animation: float 6s ease-in-out infinite forwards; /* Keep existing animation */
-        }
-        .carousel-item.active {
-            transform: scale(1) translateY(0) translate3d(0,0,0); /* Add translate3d */
-        }
-        .carousel-nav-btn:hover {
-            transform: translateY(-50%) scale(1.1) translate3d(0,0,0); /* Add translate3d */
-        }
-        .carousel-dot.active {
-            transform: scale(1.2) translate3d(0,0,0); /* Add translate3d */
-        }
+        
+        /* Theme toggle */
         .theme-toggle {
-            transform: translateY(-50%) translate3d(0,0,0); /* Add translate3d */
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%) translate3d(0,0,0); /* Explicit translate3d */
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            will-change: transform, background, border-color, box-shadow;
         }
+
+        /* Scroll-to-top button */
+        .scroll-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            will-change: transform, opacity;
+        }
+
         .scroll-to-top-btn.show {
-            transform: translateY(-5px) translate3d(0,0,0); /* Add translate3d */
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-5px) translate3d(0,0,0); /* Explicit translate3d */
         }
+
         .scroll-to-top-btn:hover {
-            transform: translateY(-8px) scale(1.1) translate3d(0,0,0); /* Add translate3d */
+            transform: translateY(-8px) scale(1.1) translate3d(0,0,0); /* Explicit translate3d */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
+
+        /* Floating Action Button (FAB) */
+        #fabAppointment {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translate3d(0,0,0); /* Explicit translate3d */
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 998;
+            will-change: transform, opacity;
+        }
+
         #fabAppointment.show {
-            transform: translateX(-50%) translateY(-5px) translate3d(0,0,0); /* Add translate3d */
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-5px) translate3d(0,0,0); /* Explicit translate3d */
         }
+
         #fabAppointment:hover {
-            transform: translateX(-50%) translateY(-8px) scale(1.05) translate3d(0,0,0); /* Add translate3d */
+            transform: translateX(-50%) translateY(-8px) scale(1.05) translate3d(0,0,0); /* Explicit translate3d */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
+
+        /* Scroll Progress Indicator */
+        #scrollProgress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent-gradient);
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s linear;
+            will-change: width;
+        }
+
+        /* Floating Navigation Dots */
         #sectionNavDots {
-            transform: translateY(-50%) translate3d(0,0,0); /* Add translate3d */
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%) translate3d(0,0,0); /* Explicit translate3d */
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            z-index: 990;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1rem 0.5rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            will-change: transform;
         }
+        body.light-theme #sectionNavDots {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        #sectionNavDots .nav-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            will-change: transform, background, box-shadow;
+        }
+
         #sectionNavDots .nav-dot.active {
-            transform: scale(1.3) translate3d(0,0,0); /* Add translate3d */
+            background: var(--accent-gradient);
+            transform: scale(1.3) translate3d(0,0,0); /* Explicit translate3d */
+            box-shadow: 0 0 10px var(--accent-gradient);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--dark-bg);
+            margin: auto;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: modalFadeIn 0.3s forwards;
+            will-change: transform, opacity;
+        }
+
+        .modal-content.success {
+            border-color: #4CAF50;
+        }
+
+        .modal-content.error {
+            border-color: #f44336;
+        }
+
+        @keyframes modalFadeIn {
+            to {
+                transform: translateY(0) translate3d(0,0,0); /* Added translate3d */
+                opacity: 1;
+            }
+        }
+
+        .close-button {
+            color: var(--text-secondary);
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Responsive Design */
@@ -1612,14 +1798,14 @@
             }
             .image-carousel-section .carousel-item img {
                 height: auto; /* Ensures aspect ratio is maintained */
-                max-height: 250px; /* Adjusted max-height for mobile carousel images */
+                max-height: 300px; /* Adjusted max-height for mobile carousel images - INCREASED */
             }
             /* Adjusted gallery-item img for better mobile responsiveness */
             .gallery-item img {
-                max-height: 250px; /* Adjusted to be consistent with image-carousel mobile max-height */
+                max-height: 300px; /* Adjusted to be consistent with image-carousel mobile max-height - INCREASED */
             }
             .testimonial-card {
-                padding: 1.2rem; /* Reduced padding further for very small screens */
+                padding: 1.5rem; /* Increased padding for better readability - INCREASED */
             }
             .testimonial-card p {
                 font-size: 0.95rem; /* Slightly smaller font */
@@ -1750,233 +1936,4 @@
             50% { transform: translateY(10px) translateX(-5px); opacity: 1; }
             75% { transform: translateY(-5px) translateX(10px); opacity: 0.8; }
         }
-
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 50%;
-            right: 2rem;
-            transform: translateY(-50%);
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            will-change: transform, background, border-color, box-shadow;
-        }
-
-        /* Scroll-to-top button */
-        .scroll-to-top-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.8rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-            will-change: transform, opacity;
-        }
-
-        .scroll-to-top-btn.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(-5px);
-        }
-
-        .scroll-to-top-btn:hover {
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Floating Action Button (FAB) */
-        #fabAppointment {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--secondary-gradient);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 998;
-            will-change: transform, opacity;
-        }
-
-        #fabAppointment.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-5px);
-        }
-
-        #fabAppointment:hover {
-            transform: translateX(-50%) translateY(-8px) scale(1.05);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Scroll Progress Indicator */
-        #scrollProgress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background: var(--accent-gradient);
-            z-index: 1001;
-            width: 0%;
-            transition: width 0.1s linear;
-            will-change: width;
-        }
-
-        /* Floating Navigation Dots */
-        #sectionNavDots {
-            position: fixed;
-            right: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            z-index: 990;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1rem 0.5rem;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            will-change: transform;
-        }
-        body.light-theme #sectionNavDots {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        #sectionNavDots .nav-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid var(--glass-border);
-            will-change: transform, background, box-shadow;
-        }
-
-        #sectionNavDots .nav-dot.active {
-            background: var(--accent-gradient);
-            transform: scale(1.3);
-            box-shadow: 0 0 10px var(--accent-gradient);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1001;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .modal.show {
-            opacity: 1;
-        }
-
-        .modal-content {
-            background-color: var(--dark-bg);
-            margin: auto;
-            padding: 30px;
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            width: 80%;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-            position: relative;
-            transform: translateY(-50px);
-            opacity: 0;
-            animation: modalFadeIn 0.3s forwards;
-            will-change: transform, opacity;
-        }
-
-        .modal-content.success {
-            border-color: #4CAF50;
-        }
-
-        .modal-content.error {
-            border-color: #f44336;
-        }
-
-        @keyframes modalFadeIn {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .close-button {
-            color: var(--text-secondary);
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: var(--text-primary);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-content h3 {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-   
+    
