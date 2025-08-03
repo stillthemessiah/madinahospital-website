@@ -10,6 +10,7 @@
     <meta name="keywords" content="Madina Community Hospital, Specialist Services, Accra Hospital, Ghana Healthcare, Emergency Care, OPD, In-patient Wards, Diagnostic Lab, Pharmacy, Maternity, Child Health, Surgery, Hypertension, Diabetes, Dental, Eye Clinic, Physiotherapy, Dietician, Palliative Care, Wound Care, Medical Specialists, Patient Resources, Book Appointment, Ritz Junction">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://yourwebsite.com/index.html"> <!-- Replace with your actual canonical URL -->
+    <link rel="stylesheet" href="./style.css">
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Madina Community Hospital & Specialist Services - Advanced Healthcare Solutions">
@@ -29,7 +30,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚕️</text></svg>">
     <!-- Font Awesome for icons (social media, resources, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style.css">
+    
+
+
    
 
     <!-- Schema.org Structured Data (JSON-LD) for Local Business -->
@@ -74,27 +77,6 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Removed Hero Background Carousel as per user request -->
-    <!-- <div class="hero-background-carousel carousel-container" data-carousel="hero-background-images" role="region" aria-label="Hero Background Image Carousel">
-        <div class="carousel-track">
-            <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="1 of 5: Hospital Interior View">
-                <img src="./Hospital-Images/1.jpg" alt="Modern hospital interior view with bright lighting" loading="eager" fetchpriority="high">
-            </div>
-            <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="2 of 5: Hospital Reception">
-                <img src="./Hospital-Images/2.jpg" alt="Hospital reception desk with staff assisting patients" loading="eager" fetchpriority="high">
-            </div>
-            <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="3 of 5: Doctor's Consultation Room">
-                <img src="./Hospital-Images/3.jpg" alt="Doctor's consultation room with examination bed" loading="eager" fetchpriority="high">
-            </div>
-            <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="4 of 5: Hospital Exterior">
-                <img src="./Hospital-Images/74381684-4c8f-499b-b9e7-2f67cb92bf93.jpg" alt="Exterior view of Madina Community Hospital building" loading="eager" fetchpriority="high">
-            </div>
-            <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="5 of 5: Hospital Interior">
-                <img src="./Hospital-Images/e53573b5-4b92-48cd-9520-b3c560efbf89.jpg" alt="Modern hospital interior with polished floors" loading="eager" fetchpriority="high">
-            </div>
-        </div>
-    </div> -->
-
     <div class="bg-animation"></div>
     
     <header role="banner">
@@ -126,26 +108,17 @@
 
     <main role="main">
        
-        <section class="hero" id="home" aria-labelledby="hero-title">
-            <!-- The hero-background-carousel was moved out of this section -->
+        <!-- NEW: Modern Hero Section -->
+        <section class="hero" id="home" aria-labelledby="hero-title" role="banner">
             <div class="hero-content">
-                <h1 id="hero-title">Your Health, Our Priority: Advanced Healthcare in Accra<span class="typing-cursor">|</span></h1>
+                <h1 id="hero-title">Your Health, Our Priority<span class="typing-cursor">|</span></h1>
                 <p>Experience the future of medical care with our world-class facilities and compassionate healthcare professionals at Madina Community Hospital & Specialist Services.</p>
-                <a href="#contact" class="cta-button" aria-label="Schedule an appointment at Madina Community Hospital">Schedule Appointment</a>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="hero-card-content">
-                        <h3>24/7 Emergency Care Services</h3>
-                        <!-- <p>State-of-the-art emergency department with advanced life support systems and rapid response teams, available around the clock.</p> -->
-                    </div>
-                    <!-- Hospital video will play on hover -->
-                    <video id="heroVideo" class="hero-video" autoplay loop muted playsinline aria-label="Video tour of Madina Community Hospital corridor" loading="lazy">
-                        <source src="./Video/WhatsApp Video 2025-07-19 at 1.01.58 PM.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="hero-cta-group">
+                    <a href="#appointment" class="cta-button primary-cta" aria-label="Book an Appointment">Book Appointment</a>
+                    <a href="#services" class="cta-button secondary-cta" aria-label="Learn More About Our Services">Learn More</a>
                 </div>
             </div>
+            <!-- The image is now the background of the hero section itself, so no separate hero-visual div is needed -->
         </section>
 
         <!-- New Image Carousel Section -->
@@ -232,42 +205,42 @@
         <section class="services" id="services" aria-labelledby="services-title">
             <h2 class="section-title fade-in" id="services-title">Our Comprehensive Healthcare Services</h2>
             <div class="services-grid">
-                <div class="service-card" id="service-opd-emergency" role="article" aria-label="24/7 OPD and Emergency Care Service">
+                <div class="service-card" role="article" aria-label="24/7 OPD and Emergency Care Service">
                     <div class="service-icon" aria-hidden="true">🏥</div>
                     <h3>24/7 OPD & Emergency Care</h3>
                     <p>Comprehensive Out-Patient Department services available 24/7, including private insurance, NHIS, cash & carry options, and critical emergency care.</p>
                 </div>
-                <div class="service-card" id="service-inpatient-wards" role="article" aria-label="In-patient and VIP Ward Services">
+                <div class="service-card" role="article" aria-label="In-patient and VIP Ward Services">
                     <div class="service-icon" aria-hidden="true">🛌</div>
                     <h3>Comfortable In-patient & VIP Wards</h3>
                     <p>Comfortable in-patient services with dedicated VIP wards for enhanced privacy, comfort, and personalized care.</p>
                 </div>
-                <div class="service-card" id="service-diagnostic-lab" role="article" aria-label="Diagnostic and Laboratory Services">
+                <div class="service-card" role="article" aria-label="Diagnostic and Laboratory Services">
                     <div class="service-icon" aria-hidden="true">🔬</div>
                     <h3>Advanced Diagnostic & Lab Services</h3>
                     <p>Advanced laboratory services, ultrasound, and comprehensive medical screening for accurate diagnosis and timely results.</p>
                 </div>
-                <div class="service-card" id="service-pharmacy" role="article" aria-label="Walk-In Pharmacy Services">
+                <div class="service-card" role="article" aria-label="Walk-In Pharmacy Services">
                     <div class="service-icon" aria-hidden="true">💊</div>
                     <h3>Convenient Walk-In Pharmacy</h3>
                     <p>Convenient walk-in pharmacy services with a wide range of medications and expert pharmaceutical advice for all your needs.</p>
                 </div>
-                <div class="service-card" id="service-maternity-child" role="article" aria-label="Maternity and Child Health Services">
+                <div class="service-card" role="article" aria-label="Maternity and Child Health Services">
                     <div class="service-icon" aria-hidden="true">👶</div>
                     <h3>Specialized Maternity & Child Health</h3>
                     <p>Dedicated Maternity & Antenatal Care, Obstetrics & Gynaecology, and comprehensive Child Health services for expectant mothers and children.</p>
                 </div>
-                <div class="service-card" id="service-specialized-surgery" role="article" aria-label="Specialized Surgery Services">
+                <div class="service-card" role="article" aria-label="Specialized Surgery Services">
                     <div class="service-icon" aria-hidden="true">🔪</div>
                     <h3>State-of-the-Art Specialized Surgery</h3>
                     <p>State-of-the-art Theatre Services and General Surgery procedures performed by expert surgeons with precision and care.</p>
                     </div>
-                <div class="service-card" id="service-specialized-clinics" role="article" aria-label="Specialized Clinics and Internal Medicine">
+                <div class="service-card" role="article" aria-label="Specialized Clinics and Internal Medicine">
                     <div class="service-icon" aria-hidden="true">🩺</div>
                     <h3>Expert Specialized Clinics</h3>
                     <p>Expert care for Hypertension & Diabetes, Dental, Eye, Physiotherapy, Dietician services, and comprehensive Internal Medicine.</p>
                 </div>
-                <div class="service-card" id="service-palliative-wound" role="article" aria-label="Palliative and Wound Care Services">
+                <div class="service-card" role="article" aria-label="Palliative and Wound Care Services">
                     <div class="service-icon" aria-hidden="true">🩹</div>
                     <h3>Compassionate Palliative & Wound Care</h3>
                     <p>Compassionate Mini Hospice care for sick & elderly, and specialized Wound Care management for optimal recovery.</p>
@@ -279,8 +252,8 @@
         <section class="doctors" id="doctors" aria-labelledby="doctors-title">
             <h2 class="section-title fade-in" id="doctors-title">Meet Our Leading Staff</h2>
             <div class="doctors-grid">
-                <div class="doctor-card" role="article" aria-label="Dr. Aisha Rahman Profile, Chief Surgeon, Orthopedics">
-                    <img src="./Staff-Images/6699c80f-837d-4882-80a9-552f1188899e.jpg" alt="Portrait of Dr. Aisha Rahman, Chief Surgeon" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/120x120/E0E0E0/333333?text=Doctor';">
+                <div class="doctor-card" role="article" aria-label="Dr. Dove Jeff K Hutordzeso Profile, Medical Director">
+                    <img src="./Staff-Images/6699c80f-837d-4882-80a9-552f1188899e.jpg" alt="Portrait of Dr. Dove Jeff K Hutordzeso, Medical Director" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/120x120/E0E0E0/333333?text=Doctor';">
                     <h4>Dr. Dove Jeff K Hutordzeso</h4>
                     <p>Medical Director</p>
                     <p>Experienced Medical Director with expertise in clinical leadership, healthcare strategy, and quality assurance. Proven ability to align medical operations with institutional goals, oversee multidisciplinary teams, and implement evidence-based protocols to enhance patient outcomes and organizational performance.</p>
@@ -345,6 +318,45 @@
                     </div>
                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
                         <img src="./Facilities-Images/fca8d972-7f1c-46a8-af33-ee6da6bcb21a.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/15817341-295b-4d86-9cc9-42ec878b795d.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/19b4204b-dc05-487d-9af6-95736299793b.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/2e05978f-fb53-4c94-8d34-b4b5b4a660b1.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/2eacad7c-a3d7-4ed6-aae4-83baebcbeeee.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/3b599969-e6ad-4771-be0b-9b1fcc08c66d.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/569d9cfe-c44e-415d-8c20-3a38c424e94c.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/6aae28e1-7dc6-4075-adda-08a35340414c.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/6fac2a7b-1068-48e8-9557-04deb7adaad4.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/85ed79de-21f1-4eb0-bad2-abdde6ec35ce.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/9b40af36-ef8b-4607-92e6-d0d1eff9e948.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                    <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/b9c291ef-1a94-442c-8b8e-d71c8156605f.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/cb63841f-4e71-4db5-b54c-81ccfd298d39.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
+                    </div>
+                     <div class="carousel-item" role="group" aria-roledescription="slide" aria-label="16 of 16: Placeholder Facility Image 16">
+                        <img src="./apparatus-images/c8a290fa-98c6-4276-b278-805b685164de.jpg" alt="Placeholder image for hospital facility 16" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E0E0E0/333333?text=Facility+16';">
                     </div>
                 </div>
                 <button class="carousel-nav-btn prev" aria-label="Previous slide">&lsaquo;</button>
@@ -1417,7 +1429,6 @@
             });
 
             // Parallax effect for hero background elements (using requestAnimationFrame)
-            // Removed heroBackgroundCarousel as per user request
             const bgAnimation = qs('.bg-animation');
             
             let currentBgAnimationTransform = 0;
@@ -1519,7 +1530,6 @@
             });
 
             // Floating elements animation (re-applied for robustness)
-            // Removed hero-card from this as its float animation is sufficient
             qsa('.service-card').forEach((element, index) => {
                 element.style.animationDelay = `${index * 0.05}s`;
             });
@@ -1606,25 +1616,26 @@
             }
 
             // --- Hero Video Hover Logic ---
-            const heroCardVideo = qs('.hero-card');
-            const heroVideo = qs('#heroVideo');
+            // Removed as the hero now uses a static background image.
+            // const heroCardVideo = qs('.hero-card');
+            // const heroVideo = qs('#heroVideo');
 
-            if (heroCardVideo && heroVideo) {
-                on(heroCardVideo, 'mouseenter', () => {
-                    if (heroVideo.paused) {
-                        heroVideo.play().catch(error => {
-                            if (error.name !== 'AbortError') {
-                                console.error("Video play error:", error);
-                            }
-                        });
-                    }
-                });
+            // if (heroCardVideo && heroVideo) {
+            //     on(heroCardVideo, 'mouseenter', () => {
+            //         if (heroVideo.paused) {
+            //             heroVideo.play().catch(error => {
+            //                 if (error.name !== 'AbortError') {
+            //                     console.error("Video play error:", error);
+            //                 }
+            //             });
+            //         }
+            //     });
 
-                on(heroCardVideo, 'mouseleave', () => {
-                    heroVideo.pause();
-                    heroVideo.currentTime = 0; 
-                });
-            }
+            //     on(heroCardVideo, 'mouseleave', () => {
+            //         heroVideo.pause();
+            //         heroVideo.currentTime = 0; 
+            //     });
+            // }
             // --- End Hero Video Hover ---
 
             // --- Scroll-to-Top Button Logic ---
