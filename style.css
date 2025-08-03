@@ -1,18 +1,18 @@
- 
+
+         
         /* Global Styles & Variables */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Force hardware acceleration for all elements by default */
-            transform: translate3d(0, 0, 0); 
-            will-change: transform, opacity; /* General will-change for performance */
+            /* Removed global transform: translate3d(0,0,0); - will-change is more specific */
+            will-change: opacity; /* General will-change for performance, transform will be specific */
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Blue to Purple */
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* Pink to Red */
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Light Blue to Cyan */
             --dark-bg: #0a0a0a;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
@@ -22,6 +22,13 @@
             --card-hover-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
             /* Define header height as a CSS variable for dynamic padding */
             --header-height: 100px; /* Default height */
+
+            /* New Healthcare Color Palette Variables */
+            --healthcare-blue: #2196F3; /* A standard medical blue */
+            --healthcare-green: #4CAF50; /* A soft, calming green */
+            --healthcare-white: #FFFFFF;
+            --healthcare-light-gray: #F5F5F5;
+            --healthcare-dark-gray: #333333;
         }
 
         body {
@@ -36,13 +43,17 @@
 
         /* Light Theme */
         body.light-theme {
-            --dark-bg: #f0f2f5;
+            --dark-bg: var(--healthcare-light-gray); /* Light background for light theme */
             --glass-bg: rgba(255, 255, 255, 0.8);
             --glass-border: rgba(0, 0, 0, 0.1);
-            --text-primary: #333333;
+            --text-primary: var(--healthcare-dark-gray);
             --text-secondary: #555555;
             --shadow-glow: 0 0 30px rgba(0, 0, 0, 0.1);
             --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            /* Adjust gradients for light theme if needed, or keep them vibrant */
+            --primary-gradient: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%); /* Lighter blue gradient */
+            --secondary-gradient: linear-gradient(135deg, #ab47bc 0%, #7b1fa2 100%); /* More subtle purple */
+            --accent-gradient: linear-gradient(135deg, #66bb6a 0%, #388e3c 100%); /* Green accent for light theme */
         }
 
         /* Preloader Styles */
@@ -149,7 +160,7 @@
             /* Removed max-height from .logo as it's controlled by svg directly */
         }
 
-        /* NEW: Styling for the hospital logo image */
+        /* Styling for the hospital logo image */
         .logo .hospital-logo {
             max-height: 85px; /* Adjusted to blend seamlessly - Increased from 70px */
             width: auto; /* Maintain aspect ratio */
@@ -220,42 +231,67 @@
             color: var(--text-primary);
         }
 
-        /* Hero Background Carousel Styling - Now full viewport */
-        /* Removed as per user request */
-
-        /* Hero Section - Content remains centered and two-column */
+        /* NEW: Modern Hero Section Styling */
         .hero {
-            min-height: 100vh; /* Changed to min-height */
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            width: 100vw; /* Full viewport width */
+            min-height: 70vh; /* Minimum height as requested */
+            display: grid; /* Use grid for layout */
+            grid-template-columns: 1fr 1fr; /* Two columns for desktop (content left, image implied right) */
             align-items: center;
-            max-width: 1200px; /* Content remains max-width */
-            margin: 0 auto; /* Content remains centered */
-            padding: 0 2rem;
-            gap: 4rem;
-            /* Use CSS variable for padding-top to dynamically adjust for header height */
-            padding-top: calc(var(--header-height) + 2rem); /* Added 2rem extra spacing */
-            position: relative; /* Essential for z-index layering of its children */
+            padding: calc(var(--header-height) + 2rem) 4rem; /* Adjust padding for header and sides */
+            position: relative;
             overflow: hidden;
-            will-change: transform; /* Keep for slide-in animations */
-            z-index: 2; /* Ensures hero content is above the background carousel */
+            z-index: 1; /* Ensure hero is above background animation */
+
+            /* Background image as focal point */
+            background-image: url('./apparatus-images/b9c291ef-1a94-442c-8b8e-d71c8156605f.jpg');
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Optional: Parallax-like effect for background */
+            will-change: background-position, transform; /* Add will-change for parallax */
+        }
+
+        /* Subtle overlay for text readability - REFINED */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dark theme overlay: heavier on left for text contrast, subtle fade from bottom */
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%),
+                        linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+            z-index: 1; /* Below content, above background image */
+            will-change: background; /* Add will-change for background changes */
+        }
+
+        body.light-theme .hero::before {
+            /* Light theme overlay: heavier on left for text contrast, subtle fade from bottom */
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 60%, transparent 100%),
+                        linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
         }
 
         .hero-content {
-            animation: slideInLeft 1s ease-out;
+            position: relative; /* Ensure content is above the overlay */
             z-index: 2;
-            position: relative;
-            will-change: transform, opacity;
+            color: var(--text-primary); /* Ensure text color is appropriate */
+            max-width: 600px; /* Limit content width for better readability */
+            animation: slideInLeft 1s ease-out forwards;
+            padding-right: 2rem; /* Add some padding on the right to separate from image (visually) */
+            will-change: transform, opacity; /* Add will-change */
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(3rem, 7vw, 5rem); /* Larger, more prominent headline */
             margin-bottom: 1rem;
-            background: var(--primary-gradient);
+            background: var(--primary-gradient); /* Existing gradient for vibrant text */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Subtle text shadow for depth */
         }
 
         /* Typing cursor for H1 */
@@ -274,21 +310,25 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem); /* Responsive subheadline */
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Subtle text shadow */
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.5rem; /* Space between buttons */
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: var(--accent-gradient);
-            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -304,6 +344,7 @@
             transform: scale(0);
             pointer-events: none;
             z-index: 2;
+            will-change: transform, opacity; /* Add will-change */
         }
 
         @keyframes ripple {
@@ -336,95 +377,28 @@
             box-shadow: 0 15px 40px rgba(79, 172, 254, 0.5);
         }
 
+        .cta-button.primary-cta {
+            background: var(--accent-gradient); /* Use accent for primary */
+            color: white;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .cta-button.secondary-cta {
+            background: transparent;
+            border: 2px solid var(--accent-gradient);
+            color: var(--accent-gradient);
+            box-shadow: none;
+        }
+
+        .cta-button.secondary-cta:hover {
+            background: var(--accent-gradient);
+            color: var(--dark-bg); /* Text color changes on hover */
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        /* Hide the old hero-visual content */
         .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: slideInRight 1s ease-out;
-            width: 100%;
-            height: 100%;
-            perspective: 1000px;
-            will-change: transform, opacity;
-            z-index: 2; /* Ensure hero-visual is above background carousel */
-        }
-
-        .hero-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-glow);
-            animation: float 6s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.7s ease-in-out, border-color 0.7s ease-in-out, box-shadow 0.7s ease-in-out, transform 0.1s linear;
-            z-index: 2;
-            will-change: transform, background, border-color, box-shadow;
-        }
-
-        .hero-card-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            padding: 1rem;
-            will-change: opacity, transform;
-        }
-
-        .hero-card h3 {
-            background: var(--secondary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-card p {
-            color: var(--text-secondary);
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.7s ease-in-out;
-            z-index: 1;
-            will-change: opacity;
-        }
-
-        .hero-card:hover .hero-video {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .hero-card:hover .hero-card-content {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-
-        /* Adjust hero-card background on hover */
-        .hero-card:hover {
-            background: rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            display: none;
         }
 
         /* Section Titles */
@@ -539,7 +513,7 @@
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0) translate3d(0,0,0); /* Added translate3d */
             }
         }
 
@@ -875,7 +849,6 @@
             border-radius: 30px;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(79, 172, 254, 0.3);
             position: relative;
             overflow: hidden;
             will-change: transform, box-shadow;
@@ -1432,44 +1405,44 @@
         @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-50px) translate3d(0,0,0); /* Added translate3d */
+                transform: translateX(-50px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0) translate3d(0,0,0); /* Added translate3d */
+                transform: translateX(0) translate3d(0,0,0); /* Ensure composite layer at end */
             }
         }
 
         @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px) translate3d(0,0,0); /* Added translate3d */
+                transform: translateX(50px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0) translate3d(0,0,0); /* Added translate3d */
+                transform: translateX(0) translate3d(0,0,0); /* Ensure composite layer at end */
             }
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px) translate3d(0,0,0); /* Added translate3d */
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) translate3d(0,0,0); /* Added translate3d */
+                transform: translateY(0) translate3d(0,0,0); /* Ensure composite layer at end */
             }
         }
 
         @keyframes fadeInUpScale {
             from {
                 opacity: 0;
-                transform: translateY(50px) scale(0.95) translate3d(0,0,0); /* Added translate3d */
+                transform: translateY(50px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1) translate3d(0,0,0); /* Added translate3d */
+                transform: translateY(0) scale(1) translate3d(0,0,0); /* Ensure composite layer at end */
             }
         }
 
@@ -1712,7 +1685,7 @@
             :root {
                 --header-height: 80px; /* Smaller header height for mobile */
             }
-            /* UPDATED: Mobile styling for the hospital logo image */
+            /* Mobile styling for the hospital logo image */
             .logo .hospital-logo {
                 max-height: 50px; /* Smaller for mobile - Increased from 40px */
                 padding: 5px 0; /* Add slight vertical padding to prevent touching edges */
@@ -1720,12 +1693,20 @@
             nav {
                 padding: 0.1rem 0.5rem; 
             }
+            /* NEW: Responsive adjustments for hero */
             .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 2rem 1rem;
-                height: auto;
-                padding-top: calc(var(--header-height) + 1rem); /* Adjusted for smaller mobile header */
+                grid-template-columns: 1fr; /* Stack columns on mobile */
+                padding: calc(var(--header-height) + 1rem) 1.5rem; /* Adjusted padding */
+                text-align: center; /* Center text on mobile */
+                min-height: 80vh; /* Slightly taller hero on mobile */
+                background-attachment: scroll; /* Disable fixed background on mobile for better performance */
+            }
+            .hero-content {
+                max-width: 100%; /* Full width for content */
+                padding-right: 0; /* Remove right padding on mobile */
+            }
+            .hero-cta-group {
+                justify-content: center; /* Center buttons on mobile */
             }
 
             .hero h1 {
@@ -1800,14 +1781,14 @@
             }
             .image-carousel-section .carousel-item img {
                 height: auto; /* Ensures aspect ratio is maintained */
-                max-height: 300px; /* Adjusted max-height for mobile carousel images - INCREASED */
+                max-height: 300px; /* Adjusted max-height for mobile carousel images */
             }
             /* Adjusted gallery-item img for better mobile responsiveness */
             .gallery-item img {
-                max-height: 300px; /* Adjusted to be consistent with image-carousel mobile max-height - INCREASED */
+                max-height: 300px; /* Adjusted to be consistent with image-carousel mobile max-height */
             }
             .testimonial-card {
-                padding: 1.5rem; /* Increased padding for better readability - INCREASED */
+                padding: 1.5rem; /* Increased padding for better readability */
             }
             .testimonial-card p {
                 font-size: 0.95rem; /* Slightly smaller font */
@@ -1848,7 +1829,7 @@
             }
             /* Fixed elements positioning for mobile */
             .theme-toggle {
-                top: 7rem; /* Position below header, adjusted from 6rem */
+                top: 7rem; /* Position below header */
                 right: 1rem;
                 width: 40px;
                 height: 40px;
@@ -1939,3 +1920,7 @@
             75% { transform: translateY(-5px) translateX(10px); opacity: 0.8; }
         }
     
+
+
+
+        
