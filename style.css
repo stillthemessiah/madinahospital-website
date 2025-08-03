@@ -243,12 +243,7 @@
             overflow: hidden;
             z-index: 1; /* Ensure hero is above background animation */
 
-            /* Background image as focal point */
-            background-image: url('./apparatus-images/b9c291ef-1a94-442c-8b8e-d71c8156605f.jpg');
-            background-size: cover; /* Cover the entire area */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* Optional: Parallax-like effect for background */
+            /* Background image will be set by JavaScript */
             will-change: background-position, transform; /* Add will-change for parallax */
         }
 
@@ -1923,4 +1918,4 @@
 
 
 
-        
+       
