@@ -1,4 +1,5 @@
 
+
          
         /* Global Styles & Variables */
         * {
@@ -242,8 +243,12 @@
             position: relative;
             overflow: hidden;
             z-index: 1; /* Ensure hero is above background animation */
-
-            /* Background image will be set by JavaScript */
+            /* UPDATED Hero Background Image */
+            background-image: url('./Facilities-Images/2009e71b-eca5-485d-9caf-958ce33cc6f5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Parallax effect */
             will-change: background-position, transform; /* Add will-change for parallax */
         }
 
@@ -472,7 +477,20 @@
         .services {
             padding: 5rem 2rem;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 3rem auto;
+            position: relative;
+            /* Removed background image from parent container */
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        body.light-theme .services::before {
+             background-color: rgba(245, 245, 245, 0.7); /* Light overlay for readability */
+        }
+
+        .services .section-title, .services .services-grid {
+            position: relative;
+            z-index: 2;
         }
 
         .services-grid {
@@ -483,8 +501,7 @@
         }
 
         .service-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            /* Removed glassmorphism background */
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2rem;
@@ -495,7 +512,60 @@
             opacity: 0;
             transform: translateY(50px) scale(0.95);
             will-change: transform, opacity, box-shadow;
+            background-size: cover;
+            background-position: center;
         }
+        
+        /* NEW: Overlay for Service Cards to ensure text readability */
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.5) 100%);
+            z-index: 1;
+            transition: background 0.4s ease;
+        }
+        
+        /* NEW: Lighter overlay on hover to reveal image */
+        .service-card:hover::before {
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0.3) 100%);
+        }
+        
+        /* NEW: Ensure card content is above the overlay */
+        .service-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* NEW: Individual background images for each service card */
+        .services-grid .service-card:nth-child(1) {
+            background-image: url('./Hospital-Images/87cc5603-5b16-41c5-b6a7-782b7d4e6baf (1).jpg'); /* Emergency Entrance */
+        }
+        .services-grid .service-card:nth-child(2) {
+            background-image: url('./Hospital-Images/19ccc679-ee68-4d43-8da4-ac2dc5154ffa.jpg'); /* Patient Room */
+        }
+        .services-grid .service-card:nth-child(3) {
+            background-image: url('./Hospital-Images/349d2ef4-c22f-4d9b-8986-b7fc0f0e93e7.jpg'); /* Lab Services */
+        }
+        .services-grid .service-card:nth-child(4) {
+            background-image: url('./Hospital-Images/32412d05-3e35-41f4-bd0e-47e4dbc0d5a3.jpg'); /* Pharmacy */
+        }
+        .services-grid .service-card:nth-child(5) {
+            background-image: url('./Hospital-Images/4.jpg'); /* Maternity */
+        }
+        .services-grid .service-card:nth-child(6) {
+            background-image: url('./Hospital-Images/5.jpg'); /* Surgery Theatre */
+        }
+        .services-grid .service-card:nth-child(7) {
+            background-image: url('./apparatus-images/6aae28e1-7dc6-4075-adda-08a35340414c.jpg'); /* Specialized Clinic Tool */
+        }
+        .services-grid .service-card:nth-child(8) {
+            background-image: url('./Hospital-Images/430780c3-b755-4ade-9632-6f0c5bbc9a95.jpg'); /* Recovery Room for Palliative Care */
+        }
+
 
         .service-card.animated {
             animation: fadeInUpScale 0.8s ease-out forwards;
@@ -512,19 +582,9 @@
             }
         }
 
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--card-hover-shadow);
         }
 
         /* Service Icon Color Diversity & Hover - RETAINED */
@@ -554,11 +614,11 @@
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: white;
         }
 
         .service-card p {
-            color: var(--text-secondary);
+            color: white;
         }
 
         /* Doctors Section */
@@ -1919,3 +1979,6 @@
 
 
        
+
+
+    
