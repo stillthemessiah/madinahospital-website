@@ -1713,7 +1713,7 @@
             // --- Hero Image Loading and Fallback Logic ---
             const heroSection = qs('.hero');
             // Use a relative path from the HTML file's location
-            const heroImagePath = './apparatus-images/b9c291ef-1a94-442c-8b8e-d71c8156605f.jpg';
+            const heroImagePath = './Facilities-Images/2009e71b-eca5-485d-9caf-958ce33cc6f5.jpg'; // FIXED hero image path
 
             const loadImage = (path, element) => {
                 const img = new Image();
@@ -1722,18 +1722,12 @@
                 img.onload = () => {
                     console.log(`[Hero Image] Image loaded successfully: ${path}`);
                     element.style.backgroundImage = `url('${path}')`;
-                    element.style.backgroundSize = 'cover';
-                    element.style.backgroundPosition = 'center';
-                    element.style.backgroundRepeat = 'no-repeat';
-                    element.style.backgroundAttachment = 'fixed'; // Keep parallax effect
                 };
 
                 img.onerror = () => {
                     console.error(`[Hero Image] Failed to load image: ${path}. Applying fallback background.`);
                     // Apply a healthcare-themed gradient as a fallback
                     element.style.backgroundImage = 'linear-gradient(135deg, var(--healthcare-blue) 0%, var(--healthcare-green) 100%)'; // Using direct healthcare colors
-                    element.style.backgroundSize = 'cover';
-                    element.style.backgroundPosition = 'center';
                     element.style.backgroundAttachment = 'scroll'; // Change to scroll for fallback
                 };
             };
